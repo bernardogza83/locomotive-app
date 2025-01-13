@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locomotive Monitoring Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-blue-50 to-indigo-50 text-gray-800 font-sans">
+
+    <!-- Dashboard Container -->
+    <div class="max-w-screen-lg mx-auto p-6">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <h1 class="text-4xl font-extrabold text-indigo-600">Locomotive Monitoring</h1>
+            <p class="text-xl font-medium text-gray-600">Welcome, {{ username }}!</p>
+        </header>
+
+        <!-- Main Content (Speed, Fuel, Temperature) -->
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+            <!-- Speed Card -->
+            <div class="bg-gradient-to-r from-indigo-200 via-blue-200 to-indigo-100 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-2xl font-semibold text-indigo-600 mb-4">Speed</h3>
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-xl font-semibold">{{ data.speed }} km/h</p>
+                    <div class="text-3xl">
+                        {% if data.speed|int > thresholds.max_speed|int %}
+                            <span class="text-red-500">🚨</span>
+                        {% else %}
+                            <span class="text-green-500">✔️</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-gray-600 text-sm">Max Speed: {{ thresholds.max_speed }} km/h</p>
+            </div>
+
+            <!-- Fuel Card -->
+            <div class="bg-gradient-to-r from-green-200 via-green-100 to-green-50 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-2xl font-semibold text-green-600 mb-4">Fuel Level</h3>
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-xl font-semibold">{{ data.fuel_level }}%</p>
+                    <div class="text-3xl">
+                        {% if data.fuel_level|int < thresholds.fuel_level_warning|int %}
+                            <span class="text-red-500">⚠️</span>
+                        {% else %}
+                            <span class="text-green-500">✔️</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-gray-600 text-sm">Warning Level: {{ thresholds.fuel_level_warning }}%</p>
+            </div>
+
+            <!-- Engine Temperature Card -->
+            <div class="bg-gradient-to-r from-yellow-200 via-yellow-100 to-yellow-50 p-6 rounded-lg shadow-lg transition-transform transform hover:scale-105 hover:shadow-2xl">
+                <h3 class="text-2xl font-semibold text-yellow-600 mb-4">Engine Temperature</h3>
+                <div class="flex items-center justify-between mb-4">
+                    <p class="text-xl font-semibold">{{ data.engine_temp }}°C</p>
+                    <div class="text-3xl">
+                        {% if data.engine_temp|int > thresholds.engine_temp_warning|int %}
+                            <span class="text-red-500">⚠️</span>
+                        {% else %}
+                            <span class="text-green-500">✔️</span>
+                        {% endif %}
+                    </div>
+                </div>
+                <p class="text-gray-600 text-sm">Warning Level: {{ thresholds.engine_temp_warning }}°C</p>
+            </div>
+
+        </section>
+
+        <!-- Footer -->
+        <footer class="mt-8 text-center text-sm text-gray-500">
+            <p>&copy; 2025 Locomotive Monitoring. All Rights Reserved.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

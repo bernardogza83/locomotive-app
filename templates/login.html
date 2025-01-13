@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="flex justify-center items-center min-h-screen bg-gradient-to-r from-indigo-200 to-indigo-500">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h1 class="text-3xl font-extrabold text-center text-indigo-600 mb-6">Login</h1>
+
+        <form method="POST">
+            <!-- Username Input -->
+            <div class="mb-5">
+                <label for="username" class="block text-lg font-medium text-gray-600">Username</label>
+                <input type="text" class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="username" name="username" required>
+            </div>
+
+            <!-- Password Input -->
+            <div class="mb-6">
+                <label for="password" class="block text-lg font-medium text-gray-600">Password</label>
+                <input type="password" class="w-full p-3 mt-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" id="password" name="password" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="w-full p-3 text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition duration-300 ease-in-out">
+                Login
+            </button>
+
+            <!-- Register Link -->
+            <p class="mt-4 text-center text-gray-600">
+                Don't have an account? <a href="{{ url_for('register') }}" class="text-indigo-600 hover:text-indigo-800">Register here</a>.
+            </p>
+        </form>
+    </div>
+</div>
+{% endblock %}
